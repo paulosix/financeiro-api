@@ -3,15 +3,19 @@ package com.br.financeiro.api.modelo;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity()
 @Table(name = "categoria", schema = "financeiro")
 public class Categoria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String Nome;
+    @NotNull
+    @Size(min = 5, max = 100)
+    private String nome;
 
 
     public long getId() {
@@ -22,11 +26,12 @@ public class Categoria {
         this.id = id;
     }
 
+
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 }
